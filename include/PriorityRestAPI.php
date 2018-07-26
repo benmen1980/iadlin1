@@ -1,9 +1,9 @@
 <?php
-$login = 'agent';
-$password = '1234';
+$login = 'demo';
+$password = '123456';
 
 //next example will recieve all messages for specific conversation
-$service_url = 'https://pri.officeandmore.co.il/odata/priority/tabula.ini/tirgul2/LOGPART?$filter=MPARTNAME ne \'\'    and  ROYY_ISUDATE ne \'Y\' &$expand=PARTUNSPECS_SUBFORM';
+$service_url = 'https://devpri.roi-holdings.com/odata/priority/tabula.ini/demo/DOCUMENTS_D';
 $curl = curl_init($service_url);
 //curl_escape($curl,$service_url);
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
