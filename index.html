@@ -100,6 +100,11 @@
                 <input id="STATDES" type="text" readonly class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
             </div>
             <br>
+            <div class="form-group ">
+                <label class="float-right" for="exampleInputEmail1">הערה למשלוח</label>
+                <textarea maxlength="48" id="STATDES" type="text"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=""></textarea>
+            </div>
+            <br>
         </form>
         <button  class="btn btn-primary float-right span6" onclick="getfrompriorityerp()">עדכן נתוני נוסע</button>
     </div>
@@ -137,9 +142,6 @@
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                /*$('#table').bootstrapTable({
-                    data: JSON.parse(this.responseText)
-                });*/
                 var response = JSON.parse(this.responseText);
                 var cdes = response[0]["CDES"]
                 document.getElementById("CDES").value = cdes;
