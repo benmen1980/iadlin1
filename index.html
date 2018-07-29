@@ -29,17 +29,21 @@
 
 
 
-
             <form>
                 <div class="form-group ">
-                    <label class="float-right" for="exampleInputEmail1">מספר השובר</label>
-                    <input  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ELAL123456">
-                    <small id="emailHelp" class="form-text text-muted float-right">מספר השובר מופיע על הטופס שמילאת בשדה התעופה</small>
+                    <label class="float-right" for="booknum">מספר השובר</label>
+                    <div class="input-group">
+                    <input  type="text" class="form-control" id="booknum" aria-describedby="emailHelp" placeholder="ELAL123456" value="LY55972"/>
+                    <span class="input-group-addon"></span>
+                    <input  type="text" class="form-control" id="docno" aria-describedby="emailHelp" placeholder="" value="" readonly/>
+                    </div>
+                    <small  class="form-text text-muted float-right">מספר השובר מופיע על הטופס שמילאת בשדה התעופה</small>
+
                 </div>
                 <br>
                 <div class="form-group span2">
-                    <label class="float-right" for="exampleInputPassword1">מספר טלפון נייד</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="0501234567">
+                    <label class="float-right" for="cellphone">מספר טלפון נייד</label>
+                    <input type="text" class="form-control" id="cellphone" placeholder="0501234567" value="0523782066">
                 </div>
 
 
@@ -62,9 +66,9 @@
         <div class="col-sm">
 
         </div>
-        <div class="col-sm">
+        <div id="error-message" class="col-sm d-none">
             <br>
-            <p id="error-message" class="text-right" dir="rtl">נוסע נכבד, לא נמצאה התאמה בין קוד השובר והנייד הנמצא במערכת, אנא נסה שנית (טלפון ללא תוים) או פנה לחברת
+            <p  class="text-right" dir="rtl">נוסע נכבד, לא נמצאה התאמה בין קוד השובר והנייד הנמצא במערכת, אנא נסה שנית (טלפון ללא תוים) או פנה לחברת
     התעופה                                      </p>
         </div>
         <div class="col-sm">
@@ -73,45 +77,60 @@
     </div>
 </div>
 <!-- container for response -->
-<div class="container span2 "><div class="row">
+<div id="responseform" class="container  d-none"><div class="row ">
     <div class="col-sm">
 
     </div>
     <div class="col-sm">
         <form>
             <div class="form-group ">
-                <label class="float-right" for="exampleInputEmail1">שם נוסע</label>
-                <input id="CDES"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                <label class="float-right" >שם נוסע</label>
+                <input id="CDES"  type="text" class="form-control"  aria-describedby="emailHelp" placeholder="">
             </div>
             <br>
             <div class="form-group ">
-                <label class="float-right" for="exampleInputEmail1">כתובת</label>
-                <input  id="ELIT_FULLADDRESS" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                <label class="float-right" >כתובת</label>
+                <input  id="ELIT_FULLADDRESS" type="text" class="form-control"  aria-describedby="emailHelp" placeholder="">
             </div>
             <br>
             <div class="form-group ">
-                <label class="float-right" for="exampleInputEmail1">עיר</label>
-                <input id="ELIT_CITYNAME" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                <label class="float-right" >עיר</label>
+                <input id="ELIT_CITYNAME" type="text" class="form-control"  aria-describedby="emailHelp" placeholder="">
                 <small id="emailHelp" class="form-text text-muted float-right">באפשרותך לעדכן נתוני נוסע</small>
             </div>
             <br>
             <div class="form-group ">
-                <label class="float-right" for="exampleInputEmail1">סטאטוס תעודת משלוח</label>
-                <input id="STATDES" type="text" readonly class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                <label class="float-right" >סטאטוס תעודת משלוח</label>
+                <input id="STATDES" type="text" readonly class="form-control"  aria-describedby="emailHelp" placeholder="">
             </div>
             <br>
             <div class="form-group ">
-                <label class="float-right" for="exampleInputEmail1">הערה למשלוח</label>
-                <textarea maxlength="48" id="STATDES" type="text"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=""></textarea>
+                <label class="float-right" >הערה למשלוח</label>
+                <textarea maxlength="48" id="comment" type="text"  class="form-control"  aria-describedby="emailHelp" placeholder=""></textarea>
             </div>
             <br>
         </form>
-        <button  class="btn btn-primary float-right span6" onclick="getfrompriorityerp()">עדכן נתוני נוסע</button>
+        <button  id="update-data" class="btn btn-primary float-right span6" onclick="updatePriority()">עדכן נתוני נוסע</button>
     </div>
     <div class="col-sm">
     </div>
 </div></div>
-<table id="table">
+
+<div class="container span2 ">
+    <div class="row">
+        <div class="col-sm">
+
+        </div>
+        <div id="dialog-message" class="col-sm d-none">
+            <br>
+            <p  class="text-right" dir="rtl">הנתונים התעדכנו בהצלחה.</p>
+        </div>
+        <div class="col-sm">
+
+        </div>
+    </div>
+</div>
+<!--table id="table">
     <thead>
     <tr>
         <th data-field="PARTNAME">Item ID</th>
@@ -119,7 +138,7 @@
         <th data-field="UNIT">Item Price</th>
     </tr>
     </thead>
-</table>
+</table-->
 
 
 
@@ -132,6 +151,46 @@
 <script>
 
     function getfrompriorityerp() {
+        resetforms();
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(this.responseText);
+                if(!response[0]){
+                    document.getElementById("error-message").classList.remove("d-none");
+                }else {
+                    document.getElementById("responseform").classList.remove("d-none");
+                    var cdes = response[0]["CDES"]
+                    var fulladdress = response[0]["ELIT_FULLADDRESS"]
+                    var cityname = response[0]["ELIT_CITYNAME"]
+                    var statusdes = response[0]["STATDES"]
+                    var docno = response[0]["DOCNO"]
+                    document.getElementById("CDES").value = cdes;
+                    document.getElementById("ELIT_FULLADDRESS").value = fulladdress;
+                    document.getElementById("ELIT_CITYNAME").value = cityname;
+                    document.getElementById("STATDES").value = statusdes;
+                    document.getElementById("docno").value = docno;
+                }
+
+            }
+        };
+        booknum = document.getElementById("booknum").value;
+        cellphone = document.getElementById("cellphone").value;
+
+        xmlhttp.open("GET","include/GetData.php?booknum="+booknum+"&cellphone="+cellphone,true);
+        xmlhttp.send();
+
+
+    }
+
+
+    function updatePriority() {
 
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -143,15 +202,48 @@
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var response = JSON.parse(this.responseText);
-                var cdes = response[0]["CDES"]
-                document.getElementById("CDES").value = cdes;
+                if(!response[0]){
+                    document.getElementById("dialog-message").classList.remove("d-none");
+                    document.getElementById("update-data").classList.add("d-none");
+                    document.getElementById("responseform").classList.add("d-none");
 
+
+
+                }else {
+                    // add warning after internal failure
+                }
+
+            }else{
+                // error on ajax
             }
         };
-        xmlhttp.open("GET","include/PriorityRestAPI.php",true);
+        docno = document.getElementById("docno").value;
+        cdes = document.getElementById("CDES").value;
+        address = document.getElementById("ELIT_FULLADDRESS").value;
+        city = document.getElementById("ELIT_CITYNAME").value;
+        comment = document.getElementById("comment").value;
+
+        xmlhttp.open("GET","include/updatePriority.php?cdes="+cdes+"&address="+address+"&city="+city+"&comment="+ comment+ "&docno="+ docno,true);
         xmlhttp.send();
 
+
     }
+
+
+function resetforms(){
+    document.getElementById("CDES").value = "";
+    document.getElementById("ELIT_FULLADDRESS").value = "";
+    document.getElementById("ELIT_CITYNAME").value = "";
+    document.getElementById("STATDES").value = "";
+    document.getElementById("comment").value = "";
+    document.getElementById("docno").value = "";
+    document.getElementById("error-message").classList.add("d-none");
+    document.getElementById("responseform").classList.add("d-none");
+    document.getElementById("dialog-message").classList.add("d-none");
+    document.getElementById("update-data").classList.remove("d-none");
+
+
+}
 </script>
 
 
