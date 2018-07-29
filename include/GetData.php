@@ -1,10 +1,17 @@
 <?php
-$login = 'demo';
-$password = '123456';
-$priform = "DOCUMENTS_D";
+include 'APIconfig.php';
 
+
+$booknum = 'LY55972';
+$cellphone = '0523782066';
+
+$booknum= $_GET["booknum"];
+$cellphone = $_GET["cellphone"];
+
+$odatafilter = '?$filter=BOOKNUM eq \''.$booknum.'\' and (ELYD_PHONE eq \''.$cellphone.'\' or ELYD_CELL eq \''.$cellphone.'\')';
 //next example will recieve all messages for specific conversation
-$service_url = 'https://devpri.roi-holdings.com/odata/priority/tabula.ini/demo/'.$priform;
+$service_url = 'https://yl.wee.co.il/odata/priority/tabula.ini/'.$companyname.'/'.$priform.$odatafilter;
+//https://yl.wee.co.il/odata/Priority/tabula.ini/ar1301/DOCUMENTS_D?$filter=BOOKNUM eq 'LY55972' and (ELYD_PHONE eq '0523782066' or ELYD_CELL eq '0542466884')
 $curl = curl_init($service_url);
 
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
