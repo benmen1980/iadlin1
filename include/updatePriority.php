@@ -24,13 +24,14 @@ $service_url = 'https://yl.wee.co.il/odata/priority/tabula.ini/'.$companyname.'/
 // https://yl.wee.co.il/odata/Priority/tabula.ini/ar1301/DOCUMENTS_D(DOCNO='SH18028050',TYPE='D')
 //$curl = curl_init($service_url);
 
-$data = array("CDES" => $cdes, "ELIT_FULLADDRESS" => $address,"ELIT_CITYNAME" => $city);
+$data = array("CDES" => $cdes, "ELIT_FULLADDRESS" => $address,"ELIT_CITYNAME" => $city,"ELYD_SENDOFF" => $comment );
 $data_string = json_encode($data);
 
 $headers = array('Content-Type: application/json');
 $curl = curl_init();
 curl_setopt($curl, CURLOPT_URL, $service_url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
 curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 curl_setopt($curl, CURLOPT_USERPWD, "$login:$password");
